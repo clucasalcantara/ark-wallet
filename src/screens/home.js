@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import {
   Alert,
   ActivityIndicator,
@@ -18,15 +18,15 @@ import {
   Keyboard,
 } from 'react-native'
 // Redux
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 // Navigation
-import {withNavigation} from 'react-navigation'
+import { withNavigation } from 'react-navigation'
 // Styled components
 import styled from '@emotion/native'
 // Assets
 import ArkLogo from '../assets/ark_logo.png'
 // Services
-import {getWallet} from '../data-management/actions/wallet'
+import { getWallet } from '../data-management/actions/wallet'
 
 const Wrapper = styled.View({
   height: Dimensions.get('window').height,
@@ -126,13 +126,13 @@ const InputWrapper = styled.TextInput({
   borderWidth: 1,
 })
 
-const DismissKeyboard = ({children}) => (
+const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 )
 
-const Welcome = ({getWalletData, data, loading, navigation}) => {
+const Welcome = ({ getWalletData, data, loading, navigation }) => {
   const [modalVisible, setModalVisble] = useState(false)
   const [walletAdrress, setWalletAddress] = useState(null)
 
@@ -141,9 +141,7 @@ const Welcome = ({getWalletData, data, loading, navigation}) => {
 
     setModalVisble(false)
 
-    if (data.wallets.length) {
-      navigation.navigate('ListWallets')
-    }
+    return navigation.navigate('ListWallets')
   }
 
   return (
@@ -196,7 +194,7 @@ Welcome.navigationOptions = {
   headerShown: false,
 }
 
-const mapStateToProps = ({data, loading, error}) => ({
+const mapStateToProps = ({ data, loading, error }) => ({
   data,
   error,
   loading,

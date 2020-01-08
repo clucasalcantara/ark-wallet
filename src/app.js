@@ -7,31 +7,28 @@
  */
 
 import React from 'react'
-// State management
 import AsyncStorage from '@react-native-community/async-storage'
-import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+// Reducers
 import reducers from './data-management/reducers'
-import {persistStore, persistReducer} from 'redux-persist'
-import {PersistGate} from 'redux-persist/integration/react'
-// Nav
+// Navigation
 import Navigation from './navigation'
 // Middlewares
 import axiosMiddleware from 'redux-axios-middleware'
-import {createLogger} from 'redux-logger'
+import { createLogger } from 'redux-logger'
 // Api Client
 import apiClient from './services/api-client'
-import {applyMiddleware} from 'redux'
+import { applyMiddleware } from 'redux'
 
 const persistConfig = {
-  // Root
   key: 'root',
-  // Storage Method (React Native)
   storage: AsyncStorage,
-  // Whitelist (Save Specific Reducers)
   whitelist: ['data'],
 }
-// Middleware: Redux Persist Persisted Reducer
+
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 const store = createStore(
