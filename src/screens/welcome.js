@@ -6,130 +6,73 @@
  * @flow
  */
 
-import React, {useEffect} from 'react'
-import {connect} from 'react-redux'
+import React from 'react'
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
   StatusBar,
+  Dimensions,
+  ActivityIndicator,
 } from 'react-native'
+import {withNavigation} from 'react-navigation'
+import {connect} from 'react-redux'
+// Styled components
+import styled from '@emotion/native'
+// Assets
+import ArkLogo from '../assets/ark_logo.png'
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen'
+const Wrapper = styled.View({
+  height: Dimensions.get('window').height,
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+})
 
-import {getWallet} from '../data-management/actions/wallet'
+const LoadingText = styled.Text({
+  color: 'gray',
+})
 
-const Welcome = props => {
-  const getWalletData = async () =>
-    props.getWallet('AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
+const Logo = styled.Image({
+  width: 120,
+  height: 120,
+})
 
-  useEffect(() => {
-    getWalletData()
-  }, [])
+const LoadingInfo = styled.View({
+  height: 60,
+  display: 'flex',
+  justifyContent: 'space-between',
+})
 
-  console.log(props.wallet)
+const Welcome = ({navigation, data}) => {
+  setTimeout(
+    () =>
+      data.wallets.length
+        ? navigation.navigate('ListWallets')
+        : navigation.navigate('Home'),
+    1000,
+  )
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>Welcome.js</Text> to change
-                this screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+        <Wrapper>
+          <Logo source={ArkLogo} />
+          <LoadingInfo>
+            <ActivityIndicator />
+            <LoadingText>Loading...</LoadingText>
+          </LoadingInfo>
+        </Wrapper>
       </SafeAreaView>
     </>
   )
 }
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-})
-
-const mapStateToProps = ({wallet, loading}) => ({
-  wallet,
-  loading,
-})
-
-const mapDispatchToProps = {
-  getWallet,
+Welcome.navigationOptions = {
+  headerShown: false,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+const mapStateToProps = ({data}) => ({
+  data,
+})
+
+export default withNavigation(connect(mapStateToProps)(Welcome))
