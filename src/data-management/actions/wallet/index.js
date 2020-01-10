@@ -1,12 +1,36 @@
-export const GET_WALLET = 'arkwallet/wallet-info/LOAD'
-export const GET_WALLET_SUCCESS = 'arkwallet/wallet-info/LOAD_SUCCESS'
-export const GET_WALLET_FAIL = 'arkwallet/wallet-info/LOAD_FAIL'
+export const GET_WALLET_BY_ADDRESS = 'arkwallet/wallet-info-by-address/LOAD'
+export const GET_WALLET_BY_ADDRESS_SUCCESS =
+  'arkwallet/wallet-info-by-address/LOAD_SUCCESS'
+export const GET_WALLET_BY_ADDRESS_FAIL =
+  'arkwallet/wallet-info-by-address/LOAD_FAIL'
 
-export const getWallet = id => ({
-  type: GET_WALLET,
-  payload: {
-    request: {
-      url: `/api/wallets/${id}`,
+export const GET_WALLET_BY_PKEY = 'arkwallet/wallet-info-by-pkey/LOAD'
+export const GET_WALLET_BY_PKEY_SUCCESS =
+  'arkwallet/wallet-info-by-pkey/LOAD_SUCCESS'
+export const GET_WALLET_BY_PKEY_FAIL = 'arkwallet/wallet-info-by-pkey/LOAD_FAIL'
+
+export const REMOVE_WALLET = 'arkwallet/wallet-removal'
+export const REFRESH_WALLETS = 'arkwallet/wallets-refresh'
+
+export const getWallet = (id, useAddressField) => {
+  console.log('UEEEEEE', { id, useAddressField })
+  return {
+    type: useAddressField ? GET_WALLET_BY_ADDRESS : GET_WALLET_BY_PKEY,
+    payload: {
+      request: {
+        url: `/api/wallets/${id}`,
+      },
     },
+  }
+}
+
+export const removeWallet = id => ({
+  type: REMOVE_WALLET,
+  payload: {
+    id,
   },
+})
+
+export const refreshWallets = () => ({
+  type: REFRESH_WALLETS,
 })
