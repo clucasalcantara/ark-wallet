@@ -44,7 +44,7 @@
 		00E356EE1AD99517003FC87E /* arkwalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = arkwalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* arkwalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = arkwalletTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* arkwallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arkwallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* ARK Mobile Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARK Mobile Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = arkwallet/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = arkwallet/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* arkwallet.app */,
+				13B07F961A680F5B00A75B9A /* ARK Mobile Wallet.app */,
 				00E356EE1AD99517003FC87E /* arkwalletTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* arkwallet-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* arkwallet-tvOSTests.xctest */,
@@ -194,7 +194,6 @@
 				A6C0C6F05A4014972A3E136A /* Pods-arkwalletTests.debug.xcconfig */,
 				235374298313720E125A4F8A /* Pods-arkwalletTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -237,7 +236,7 @@
 			);
 			name = arkwallet;
 			productName = arkwallet;
-			productReference = 13B07F961A680F5B00A75B9A /* arkwallet.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* ARK Mobile Wallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* arkwallet-tvOS */ = {
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -635,8 +635,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = arkwallet;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.caioalcantara.arkwallet;
+				PRODUCT_NAME = "ARK Mobile Wallet";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -654,8 +654,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = arkwallet;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.caioalcantara.arkwallet;
+				PRODUCT_NAME = "ARK Mobile Wallet";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
