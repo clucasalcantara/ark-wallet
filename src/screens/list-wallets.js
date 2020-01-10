@@ -1,78 +1,93 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  * @flow
  */
-import React, {useEffect, useState} from 'react'
-import {SafeAreaView, StatusBar, ActivityIndicator} from 'react-native'
-import {connect} from 'react-redux'
-import {withNavigation} from 'react-navigation'
+import React, { useEffect, useState, useCallback } from 'react'
+import {
+  SafeAreaView,
+  StatusBar,
+  RefreshControl,
+  Dimensions,
+} from 'react-native'
+import { connect } from 'react-redux'
+import { withNavigation } from 'react-navigation'
 // Styled components
 import styled from '@emotion/native'
 // Services
-import getCurrentPrice from '../services/exchange-price'
+import { getMarketPrice } from '../services'
+import { removeWallet, getWallet } from '../data-management/actions/wallet'
+// UI Elements
+import { Card, ImportModal } from '../components/molecules'
+import { EmptyListComponent, FAB } from '../components/atoms'
 
-const Wrapper = styled.ScrollView({
+const Wrapper = styled.View({
   flexGrow: 1,
+  height: Dimensions.get('window').height,
 })
 
-const Container = styled.ScrollView({
-  padding: 20,
+const Container = styled.FlatList({
   flex: 1,
-})
-
-const WalletCard = styled.View({
-  height: 120,
-  display: 'flex',
-  backgroundColor: 'red',
-  marginBottom: 20,
   padding: 20,
 })
 
-const BalanceLabel = styled.Text({
-  color: 'white',
-  fontSize: 16,
-})
-
-const CardText = styled.Text({
-  color: 'white',
-  fontSize: 18,
-})
-
-const ListWallets = ({data}) => {
+const ListWallets = ({
+  data: { wallets, loading },
+  removeWallet,
+  getWallet,
+}) => {
+  console.log({ wallets })
   const [marketCapValue, setMarketCap] = useState(0)
+  const [isRefreshing, setRefreshing] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true)
+
+    wallets.map(({ address }) => getWallet(address))
+
+    setRefreshing(false)
+  }, [isRefreshing])
+
   useEffect(() => {
     ;(async function getExchangePrice() {
-      setMarketCap(await getCurrentPrice())
+      setMarketCap(await getMarketPrice())
     })()
   }, [])
-
-  const {wallets} = data
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
+      <ImportModal
+        isVisible={modalVisible}
+        handleVisibility={setModalVisible}
+        isLoading={loading}
+      />
       <SafeAreaView>
         {JSON.stringify(wallets) !== '{}' && (
           <Wrapper>
-            <Container>
-              {wallets.map((wallet, idx) => (
-                <WalletCard key={idx}>
-                  <BalanceLabel>Balance</BalanceLabel>
-                  <CardText>{wallet.balance}</CardText>
-                  <CardText>
-                    Equivalent:{' '}
-                    {marketCapValue > 0 ? (
-                      `${wallet.balance * marketCapValue} USD`
-                    ) : (
-                      <ActivityIndicator color="white" />
-                    )}
-                  </CardText>
-                </WalletCard>
-              ))}
-            </Container>
+            <Container
+              contentContainerStyle={{ paddingBottom: 120 }}
+              contentInsetAdjustmentBehavior="automatic"
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefreshing}
+                  onRefresh={onRefresh}
+                />
+              }
+              data={wallets}
+              ListEmptyComponent={<EmptyListComponent />}
+              // ListFooterComponent={}
+              renderItem={({ item: { address, balance } }) => (
+                <Card
+                  action={{ type: 'remove', action: removeWallet }}
+                  address={address}
+                  balance={balance}
+                  marketCapValue={marketCapValue}
+                />
+              )}
+              keyExtractor={item => item.address}
+            />
+            <FAB handlePress={() => setModalVisible(true)} />
           </Wrapper>
         )}
       </SafeAreaView>
@@ -80,8 +95,15 @@ const ListWallets = ({data}) => {
   )
 }
 
-const mapStateToProps = ({data}) => ({
+const mapStateToProps = ({ data }) => ({
   data,
 })
 
-export default withNavigation(connect(mapStateToProps)(ListWallets))
+const mapDispatchToProps = {
+  removeWallet,
+  getWallet,
+}
+
+export default withNavigation(
+  connect(mapStateToProps, mapDispatchToProps)(ListWallets),
+)

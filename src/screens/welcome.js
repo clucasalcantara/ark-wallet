@@ -13,12 +13,12 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native'
-import {withNavigation} from 'react-navigation'
-import {connect} from 'react-redux'
+import { withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
 // Styled components
 import styled from '@emotion/native'
-// Assets
-import ArkLogo from '../assets/ark_logo.png'
+// UI Elements
+import Header from '../components/atoms/header'
 
 const Wrapper = styled.View({
   height: Dimensions.get('window').height,
@@ -42,7 +42,7 @@ const LoadingInfo = styled.View({
   justifyContent: 'space-between',
 })
 
-const Welcome = ({navigation, data}) => {
+const Welcome = ({ navigation, data }) => {
   setTimeout(
     () =>
       data.wallets.length
@@ -56,7 +56,7 @@ const Welcome = ({navigation, data}) => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <Wrapper>
-          <Logo source={ArkLogo} />
+          <Header title="Welcome to ARK Wallet" showLogo />
           <LoadingInfo>
             <ActivityIndicator />
             <LoadingText>Loading...</LoadingText>
@@ -71,7 +71,7 @@ Welcome.navigationOptions = {
   headerShown: false,
 }
 
-const mapStateToProps = ({data}) => ({
+const mapStateToProps = ({ data }) => ({
   data,
 })
 
