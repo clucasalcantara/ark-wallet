@@ -12,17 +12,14 @@ export const GET_WALLET_BY_PKEY_FAIL = 'arkwallet/wallet-info-by-pkey/LOAD_FAIL'
 export const REMOVE_WALLET = 'arkwallet/wallet-removal'
 export const REFRESH_WALLETS = 'arkwallet/wallets-refresh'
 
-export const getWallet = (id, useAddressField) => {
-  console.log('UEEEEEE', { id, useAddressField })
-  return {
-    type: useAddressField ? GET_WALLET_BY_ADDRESS : GET_WALLET_BY_PKEY,
-    payload: {
-      request: {
-        url: `/api/wallets/${id}`,
-      },
+export const getWallet = (id, useAddressField) => ({
+  type: useAddressField ? GET_WALLET_BY_ADDRESS : GET_WALLET_BY_PKEY,
+  payload: {
+    request: {
+      url: `/api/wallets/${id}`,
     },
-  }
-}
+  },
+})
 
 export const removeWallet = id => ({
   type: REMOVE_WALLET,
