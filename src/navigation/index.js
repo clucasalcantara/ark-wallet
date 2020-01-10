@@ -5,11 +5,11 @@ import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createStackNavigator } from 'react-navigation-stack'
 // Screens
-import { Home, Welcome, ListWallets } from '../screens'
+import { Home, Welcome, WalletList } from '../screens'
 
 const WalletsNavigator = createStackNavigator({
-  ListWallets: {
-    screen: ListWallets,
+  WalletList: {
+    screen: WalletList,
     navigationOptions: ({ navigation }) => ({
       title: 'My Wallets',
       headerLeft: () => (
@@ -31,7 +31,7 @@ const appNavigator = createDrawerNavigator({
       drawerLabel: 'Home',
     }),
   },
-  ListWallets: {
+  WalletList: {
     screen: WalletsNavigator,
     navigationOptions: () => ({
       drawerLabel: 'My Wallets',

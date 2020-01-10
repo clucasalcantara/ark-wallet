@@ -71,7 +71,7 @@ const ImportForm = ({
 
     handleVisibility(false)
 
-    return navigation.navigate('ListWallets')
+    return navigation.navigate('WalletList')
   }
 
   const fetchWallet = async () => {

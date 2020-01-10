@@ -30,7 +30,7 @@ const Container = styled.FlatList({
   padding: 20,
 })
 
-const ListWallets = ({
+const WalletList = ({
   data: { wallets, loading },
   removeWallet,
   getWallet,
@@ -105,5 +105,5 @@ const mapDispatchToProps = {
 }
 
 export default withNavigation(
-  connect(mapStateToProps, mapDispatchToProps)(ListWallets),
+  connect(mapStateToProps, mapDispatchToProps)(WalletList),
 )

@@ -26,7 +26,7 @@ const Home = ({ data: { wallets, loading }, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
 
   if (wallets.length) {
-    navigation.navigate('ListWallets')
+    navigation.navigate('WalletList')
   }
 
   return (

@@ -1,5 +1,5 @@
 import Home from './home'
 import Welcome from './welcome'
-import ListWallets from './list-wallets'
+import WalletList from './wallet-list'
 
-export { Home, Welcome, ListWallets }
+export { Home, Welcome, WalletList }

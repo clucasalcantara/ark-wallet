@@ -46,7 +46,7 @@ const Welcome = ({ navigation, data }) => {
   setTimeout(
     () =>
       data.wallets.length
-        ? navigation.navigate('ListWallets')
+        ? navigation.navigate('WalletList')
         : navigation.navigate('Home'),
     1000,
   )
