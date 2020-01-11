@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import Modal from '../modal'
 import Button from '../../atoms/button'
 // Services
-import { getWallet } from '../../../data-management/actions/wallet'
+import { getWallet, cleanErrors } from '../../../data-management/actions/wallet'
 
 const Label = styled.Text({
   marginTop: 20,
@@ -54,7 +54,7 @@ const StyledText = styled.Text({
 
 const ImportForm = ({
   getWalletData,
-  data: { wallets },
+  data: { wallets, error },
   navigation,
   isVisible,
   handleVisibility,
@@ -76,11 +76,33 @@ const ImportForm = ({
       )
     }
 
-    await getWalletData(walletAdrress, useAddressField)
+    if (!error) {
+      setWalletAddress(null)
+      await getWalletData(walletAdrress, useAddressField)
 
-    handleVisibility(false)
+      handleVisibility(false)
 
-    return navigation.navigate('WalletList')
+      return navigation.navigate('WalletList')
+    }
+
+    Alert.alert(
+      'Attention',
+      `An errour occourred while importing your wallet, retry?`,
+      [
+        {
+          text: 'Confirm',
+          onPress: () => fetchAndNavigate(),
+        },
+        {
+          text: 'Cancel',
+          onPress: () => {
+            handleVisibility(false)
+            setWalletAddress(null)
+            cleanErrors()
+          },
+        },
+      ],
+    )
   }
 
   const fetchWallet = async () => {
@@ -152,14 +174,13 @@ const ImportForm = ({
   )
 }
 
-const mapStateToProps = ({ data, loading, error }) => ({
+const mapStateToProps = ({ data }) => ({
   data,
-  error,
-  loading,
 })
 
 const mapDispatchToProps = {
   getWalletData: getWallet,
+  cleanErrors,
 }
 
 export default withNavigation(

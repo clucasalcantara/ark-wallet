@@ -7,6 +7,7 @@ import {
   GET_WALLET_BY_ADDRESS_SUCCESS,
   GET_WALLET_BY_ADDRESS_FAIL,
   REMOVE_WALLET,
+  CLEAN_ERRORS,
 } from '../../actions/wallet'
 
 const INITIAL_STATE = {
@@ -88,6 +89,9 @@ export const walletReducer = (state = INITIAL_STATE, action) => {
       )
 
       return { ...state, wallets: stateToUpdate }
+    }
+    case CLEAN_ERRORS: {
+      return { ...state, error: false }
     }
     default:
       return state

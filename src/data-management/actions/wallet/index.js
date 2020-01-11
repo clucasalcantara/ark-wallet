@@ -11,6 +11,7 @@ export const GET_WALLET_BY_PKEY_FAIL = 'arkwallet/wallet-info-by-pkey/LOAD_FAIL'
 
 export const REMOVE_WALLET = 'arkwallet/wallet-removal'
 export const REFRESH_WALLETS = 'arkwallet/wallets-refresh'
+export const CLEAN_ERRORS = 'arkwallet/clean-errors'
 
 export const getWallet = (id, useAddressField) => ({
   type: useAddressField ? GET_WALLET_BY_ADDRESS : GET_WALLET_BY_PKEY,
@@ -30,4 +31,8 @@ export const removeWallet = id => ({
 
 export const refreshWallets = () => ({
   type: REFRESH_WALLETS,
+})
+
+export const cleanErrors = () => ({
+  type: CLEAN_ERRORS,
 })
