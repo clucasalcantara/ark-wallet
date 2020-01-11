@@ -13,7 +13,11 @@ const Wrapper = styled.View({
 })
 
 export default () => (
-  <Wrapper>
+  <Wrapper
+    accessible
+    accessibilityLabel="Wallet empty component"
+    accessibilityHint="Appears when no wallet is imported"
+    accessibilityRole="text">
     <StyledText>No wallets imported yet :(</StyledText>
   </Wrapper>
 )

@@ -20,7 +20,11 @@ const Logo = styled.Image({
 })
 
 export default ({ title, showLogo }) => (
-  <Wrapper>
+  <Wrapper
+    accessible
+    accessibilityLabel="ARK Wallet Header"
+    accessibilityHint="Displays ARK Logo"
+    accessibilityRole="header">
     <HeaderText>{title}</HeaderText>
     {showLogo && <Logo source={ArkLogo} />}
   </Wrapper>

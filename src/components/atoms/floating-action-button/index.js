@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/native'
 // Assets
 import plusIcon from '../../../assets/plus_icon.png'
+import { Dimensions } from 'react-native'
 
 const FAB = styled.TouchableOpacity({
   position: 'absolute',
@@ -11,8 +12,12 @@ const FAB = styled.TouchableOpacity({
   alignItems: 'center',
   justifyContent: 'center',
   right: 30,
-  bottom: 130,
+  bottom: 120,
   backgroundColor: 'red',
+  shadowOpacity: 0.3,
+  shadowRadius: 3,
+  shadowColor: '#000',
+  shadowOffset: { height: 3, width: 0 },
 })
 
 const PlusIconWrapper = styled.Image({
@@ -21,7 +26,12 @@ const PlusIconWrapper = styled.Image({
 })
 
 export default ({ handlePress }) => (
-  <FAB onPress={handlePress}>
+  <FAB
+    accessible
+    accessibilityLabel="Wallet import floating button"
+    accessibilityHint="Displays the modal import to add a wallet"
+    accessibilityRole="button"
+    onPress={handlePress}>
     <PlusIconWrapper source={plusIcon} />
   </FAB>
 )

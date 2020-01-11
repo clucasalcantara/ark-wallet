@@ -27,7 +27,12 @@ const executeAction = ({ action, type, value }) =>
   ])
 
 export default ({ action, type, value }) => (
-  <RemoveButton onPress={() => executeAction({ action, type, value })}>
+  <RemoveButton
+    accessible
+    accessibilityLabel="Wallet remove button"
+    accessibilityHint="Removes a wallet from the list"
+    accessibilityRole="button"
+    onPress={() => executeAction({ action, type, value })}>
     <RemoveIcon source={trashIcon} />
   </RemoveButton>
 )

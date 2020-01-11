@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, Alert, Text, Switch } from 'react-native'
+import { ActivityIndicator, Alert, Dimensions } from 'react-native'
 import styled from '@emotion/native'
 import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -16,31 +16,40 @@ const Label = styled.Text({
   textAlign: 'center',
 })
 
+const StyledSwitch = styled.Switch({
+  margin: 5,
+})
+
 const Container = styled.View({
-  height: 250,
+  width: Dimensions.get('screen').width,
+  flex: 1,
+  padding: 20,
   justifyContent: 'space-between',
   alignItems: 'center',
 })
 
 const InputContainer = styled.View({
+  width: Dimensions.get('screen').width,
+  padding: 40,
   height: 40,
-  marginBottom: 40,
+  marginBottom: 80,
 })
 
 const SwitchContainer = styled.View({
-  width: 350,
-  display: 'flex',
+  flex: 1,
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  flex: 1,
 })
 
 const InputWrapper = styled.TextInput({
   height: 40,
-  width: 300,
   borderColor: 'gray',
   borderWidth: 1,
+})
+
+const StyledText = styled.Text({
+  fontSize: 14,
 })
 
 const ImportForm = ({
@@ -100,17 +109,37 @@ const ImportForm = ({
         <Label>Wallet Identifier</Label>
         {isLoading && <ActivityIndicator />}
         {!isLoading && (
-          <Container>
-            <SwitchContainer>
-              <Text>Import by Public Key</Text>
-              <Switch
+          <Container
+            accessible
+            accessibilityLabel="Wallet import form"
+            accessibilityHint="Adds a wallet">
+            <SwitchContainer
+              accessible
+              accessibilityLabel="Wallet import methods"
+              accessibilityHint="Choose a way to import, by address or public key"
+              accessibilityRole="button">
+              <StyledText>Import by Public Key</StyledText>
+              <StyledSwitch
                 onValueChange={() => setAddressFieldUsage(!useAddressField)}
                 value={useAddressField}
               />
-              <Text>Import by Address</Text>
+              <StyledText>Import by Address</StyledText>
             </SwitchContainer>
-            <InputContainer>
+            <InputContainer
+              accessible
+              accessibilityLabel="Insert your wallet identificator here"
+              accessibilityActions={[{ name: 'paste', label: 'paste' }]}
+              onAccessibilityAction={event => {
+                switch (event.nativeEvent.actionName) {
+                  case 'paste':
+                    Alert.alert('Alert', 'Paste action success')
+                    break
+                }
+              }}>
               <InputWrapper
+                accessible
+                accessibilityLabel="Wallet input"
+                accessibilityHint="Put your wallet identificator here"
                 onChangeText={text => setWalletAddress(text)}
                 value={walletAdrress}
               />

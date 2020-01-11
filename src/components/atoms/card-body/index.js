@@ -22,7 +22,11 @@ const Body = styled.View({
 })
 
 export default ({ content, showSymbol }) => (
-  <Body>
+  <Body
+    accessible
+    accessibilityLabel={`Wallet balance`}
+    accessibilityHint={`Displays the wallet balance in ARK`}
+    accessibilityRole="text">
     {showSymbol && <ArkSymbol source={arkSymbol} />}
     <StyledText>{content}</StyledText>
   </Body>

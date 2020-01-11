@@ -11,7 +11,11 @@ const Wrapper = styled.View({
 })
 
 export default ({ action: { type, action, value }, actionEnabled, label }) => (
-  <Wrapper>
+  <Wrapper
+    accessible
+    accessibilityLabel="Wallet card header"
+    accessibilityHint="Contains a remove button and wallet label"
+    accessibilityRole="text">
     <Label content={label} />
     {actionEnabled && (
       <RemoveButton action={action} type={type} value={value} />

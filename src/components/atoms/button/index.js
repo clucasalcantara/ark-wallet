@@ -7,6 +7,10 @@ const Wrapper = styled.TouchableOpacity({
   height: 50,
   borderRadius: 5,
   justifyContent: 'center',
+  shadowOpacity: 0.3,
+  shadowRadius: 3,
+  shadowColor: '#000',
+  shadowOffset: { height: 3, width: 0 },
 })
 
 const ButtonText = styled.Text({
@@ -16,7 +20,12 @@ const ButtonText = styled.Text({
 })
 
 export default ({ handlePress, label }) => (
-  <Wrapper onPress={handlePress}>
+  <Wrapper
+    accessible
+    accessibilityLabel={`${label} button `}
+    accessibilityHint={`Tap to ${label}`}
+    accessibilityRole="button"
+    onPress={handlePress}>
     <ButtonText>{label}</ButtonText>
   </Wrapper>
 )

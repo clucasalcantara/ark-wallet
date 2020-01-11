@@ -12,6 +12,11 @@ const Wrapper = styled.View({
   marginBottom: 20,
   padding: 20,
   justifyContent: 'space-between',
+  shadowOpacity: 0.3,
+  shadowRadius: 3,
+  shadowColor: '#000',
+  shadowOffset: { height: 3, width: 0 },
+  borderRadius: 5,
 })
 
 export default ({
@@ -20,7 +25,10 @@ export default ({
   marketCapValue,
   action: { type, action },
 }) => (
-  <Wrapper>
+  <Wrapper
+    accessible
+    accessibilityLabel="Wallet card"
+    accessibilityHint="Displays the wallet information">
     <CardHeader
       label="Balance"
       action={{ action, type, value: address }}

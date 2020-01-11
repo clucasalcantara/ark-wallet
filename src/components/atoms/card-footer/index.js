@@ -14,10 +14,14 @@ const CardFooter = styled.View({
 })
 
 export default ({ balance, currency, isLoading }) => (
-  <CardFooter>
+  <CardFooter
+    accessible
+    accessibilityLabel="Wallet card footer"
+    accessibilityHint={`Displays the wallet balance in ${currency}`}
+    accessibilityRole="text">
     {isLoading && <ActivityIndicator color="white" />}
-    {!isLoading && <FooterText>
-      {`Equivalent: ${balance.toFixed(2)} ${currency}`}
-    </FooterText>}
+    {!isLoading && (
+      <FooterText>{`Equivalent: ${balance.toFixed(2)} ${currency}`}</FooterText>
+    )}
   </CardFooter>
 )
