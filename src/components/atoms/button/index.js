@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/native'
 
 const Wrapper = styled.TouchableOpacity({
-  backgroundColor: 'red',
+  backgroundColor: '#F73F46',
   width: 250,
   height: 50,
   borderRadius: 5,

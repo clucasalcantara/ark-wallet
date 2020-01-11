@@ -13,7 +13,7 @@ const FAB = styled.TouchableOpacity({
   justifyContent: 'center',
   right: 30,
   bottom: 120,
-  backgroundColor: 'red',
+  backgroundColor: '#F73F46',
   shadowOpacity: 0.3,
   shadowRadius: 3,
   shadowColor: '#000',

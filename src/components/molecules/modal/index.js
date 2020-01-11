@@ -17,7 +17,7 @@ const Wrapper = styled.KeyboardAvoidingView({
 })
 
 const CloseButton = styled.TouchableOpacity({
-  backgroundColor: 'red',
+  backgroundColor: '#F73F46',
   width: 30,
   height: 30,
   borderRadius: 5,

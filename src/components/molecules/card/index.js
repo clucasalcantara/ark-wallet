@@ -8,7 +8,7 @@ import CardBody from '../../atoms/card-body'
 const Wrapper = styled.View({
   height: 120,
   display: 'flex',
-  backgroundColor: 'red',
+  backgroundColor: '#F73F46',
   marginBottom: 20,
   padding: 20,
   justifyContent: 'space-between',
