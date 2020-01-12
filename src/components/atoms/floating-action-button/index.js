@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { func } from 'prop-types'
 // Assets
 import plusIcon from '../../../assets/plus_icon.png'
-import { Dimensions } from 'react-native'
 
-const FAB = styled.TouchableOpacity({
+const FloatingActionButton = styled.TouchableOpacity({
   position: 'absolute',
   width: 50,
   height: 50,
@@ -25,13 +25,19 @@ const PlusIconWrapper = styled.Image({
   height: 30,
 })
 
-export default ({ handlePress }) => (
-  <FAB
+const FAB = ({ handlePress }) => (
+  <FloatingActionButton
     accessible
     accessibilityLabel="Wallet import floating button"
     accessibilityHint="Displays the modal import to add a wallet"
     accessibilityRole="button"
     onPress={handlePress}>
     <PlusIconWrapper source={plusIcon} />
-  </FAB>
+  </FloatingActionButton>
 )
+
+FAB.propTypes = {
+  handlePress: func.isRequired,
+}
+
+export default FAB

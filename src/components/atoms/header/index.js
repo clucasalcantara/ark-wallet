@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { string, bool } from 'prop-types'
 // Assets
 import ArkLogo from '../../../assets/ark_logo.png'
 
@@ -19,7 +20,7 @@ const Logo = styled.Image({
   height: 120,
 })
 
-export default ({ title, showLogo }) => (
+const Header = ({ title, showLogo }) => (
   <Wrapper
     accessible
     accessibilityLabel="ARK Wallet Header"
@@ -29,3 +30,15 @@ export default ({ title, showLogo }) => (
     {showLogo && <Logo source={ArkLogo} />}
   </Wrapper>
 )
+
+Header.propTypes = {
+  title: string,
+  showLogo: bool,
+}
+
+Header.defaultProps = {
+  title: 'Welcome to ARK Wallet',
+  showLogo: true,
+}
+
+export default Header

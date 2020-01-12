@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { func, string } from 'prop-types'
 
 const Wrapper = styled.TouchableOpacity({
   backgroundColor: '#F73F46',
@@ -19,7 +20,7 @@ const ButtonText = styled.Text({
   color: 'white',
 })
 
-export default ({ handlePress, label }) => (
+const Button = ({ handlePress, label }) => (
   <Wrapper
     accessible
     accessibilityLabel={`${label} button `}
@@ -29,3 +30,10 @@ export default ({ handlePress, label }) => (
     <ButtonText>{label}</ButtonText>
   </Wrapper>
 )
+
+Button.propTypes = {
+  handlePress: func.isRequired,
+  label: string.isRequired,
+}
+
+export default Button

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { bool, string } from 'prop-types'
 // Assets
 import arkSymbol from '../../../assets/ark_symbol.png'
 
@@ -21,7 +22,7 @@ const Body = styled.View({
   marginBottom: 10,
 })
 
-export default ({ content, showSymbol }) => (
+const CardBody = ({ content, showSymbol }) => (
   <Body
     accessible
     accessibilityLabel={`Wallet balance`}
@@ -31,3 +32,14 @@ export default ({ content, showSymbol }) => (
     <StyledText>{content}</StyledText>
   </Body>
 )
+
+CardBody.propTypes = {
+  content: string.isRequired,
+  showSymbol: bool,
+}
+
+CardBody.defaultProps = {
+  showSymbol: true,
+}
+
+export default CardBody

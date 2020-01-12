@@ -1,6 +1,6 @@
 import React from 'react'
-import { Modal } from 'react-native'
 import styled from '@emotion/native'
+import { arrayOf, bool, oneOfType, node, func } from 'prop-types'
 
 const CloseText = styled.Text({
   fontSize: 16,
@@ -33,8 +33,10 @@ const Body = styled.View({
   alignItems: 'center',
 })
 
-export default ({ children, closeAction, isClosed }) => (
-  <Modal animationType="fade" visible={isClosed} transparent>
+const ModalWrapper = styled.Modal({})
+
+const Modal = ({ children, closeAction, isClosed }) => (
+  <ModalWrapper animationType="fade" visible={isClosed} transparent>
     <Wrapper behavior="padding">
       <CloseButton
         accessibilityLabel="Import modal close button"
@@ -45,5 +47,17 @@ export default ({ children, closeAction, isClosed }) => (
       </CloseButton>
       <Body>{children}</Body>
     </Wrapper>
-  </Modal>
+  </ModalWrapper>
 )
+
+Modal.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired,
+  closeAction: func.isRequired,
+  isClosed: bool,
+}
+
+Modal.defaultProps = {
+  isClosed: true,
+}
+
+export default Modal

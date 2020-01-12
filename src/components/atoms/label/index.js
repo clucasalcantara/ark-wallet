@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { string } from 'prop-types'
 
 const StyledLabel = styled.Text({
   color: 'white',
@@ -7,4 +8,10 @@ const StyledLabel = styled.Text({
   marginBottom: 10,
 })
 
-export default ({ content }) => <StyledLabel>{content}</StyledLabel>
+const Label = ({ content }) => <StyledLabel>{content}</StyledLabel>
+
+Label.propTypes = {
+  content: string.isRequired,
+}
+
+export default Label

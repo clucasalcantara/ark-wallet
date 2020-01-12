@@ -3,6 +3,7 @@ import { ActivityIndicator, Alert, Dimensions } from 'react-native'
 import styled from '@emotion/native'
 import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
+import { array, bool, func, string, oneOfType, shape, object } from 'prop-types'
 // UI Elements
 import Modal from '../modal'
 import Button from '../../atoms/button'
@@ -181,6 +182,22 @@ const mapStateToProps = ({ data }) => ({
 const mapDispatchToProps = {
   getWalletData: getWallet,
   cleanErrors,
+}
+
+ImportForm.propTypes = {
+  getWalletData: func.isRequired,
+  data: shape({
+    wallets: array,
+    error: oneOfType([string, bool]),
+  }),
+  navigation: object.isRequired,
+  isVisible: bool.isRequired,
+  handleVisibility: func.isRequired,
+  isLoading: bool,
+}
+
+ImportForm.defaultProps = {
+  isLoading: true,
 }
 
 export default withNavigation(

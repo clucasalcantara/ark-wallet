@@ -1,6 +1,7 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import styled from '@emotion/native'
+import { bool, string } from 'prop-types'
 
 const FooterText = styled.Text({
   color: 'white',
@@ -8,13 +9,13 @@ const FooterText = styled.Text({
   alignSelf: 'baseline',
 })
 
-const CardFooter = styled.View({
+const Wrapper = styled.View({
   color: 'white',
   fontSize: 18,
 })
 
-export default ({ balance, currency, isLoading }) => (
-  <CardFooter
+const CardFooter = ({ balance, currency, isLoading }) => (
+  <Wrapper
     accessible
     accessibilityLabel="Wallet card footer"
     accessibilityHint={`Displays the wallet balance in ${currency}`}
@@ -23,5 +24,17 @@ export default ({ balance, currency, isLoading }) => (
     {!isLoading && (
       <FooterText>{`Equivalent: ${balance.toFixed(2)} ${currency}`}</FooterText>
     )}
-  </CardFooter>
+  </Wrapper>
 )
+
+CardFooter.propTypes = {
+  balance: string.isRequired,
+  currency: string.isRequired,
+  isLoading: bool,
+}
+
+CardFooter.defaultProps = {
+  isLoading: true,
+}
+
+export default CardFooter

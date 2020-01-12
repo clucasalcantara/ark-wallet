@@ -1,6 +1,7 @@
 import React from 'react'
 import { Alert } from 'react-native'
 import styled from '@emotion/native'
+import { string, func } from 'prop-types'
 // Assets
 import trashIcon from '../../../assets/trash_icon.png'
 
@@ -9,7 +10,7 @@ const RemoveIcon = styled.Image({
   width: 20,
 })
 
-const RemoveButton = styled.TouchableOpacity({
+const StyledButton = styled.TouchableOpacity({
   color: 'white',
   fontSize: 16,
 })
@@ -26,13 +27,21 @@ const executeAction = ({ action, type, value }) =>
     },
   ])
 
-export default ({ action, type, value }) => (
-  <RemoveButton
+const RemoveButton = ({ action, type, value }) => (
+  <StyledButton
     accessible
     accessibilityLabel="Wallet remove button"
     accessibilityHint="Removes a wallet from the list"
     accessibilityRole="button"
     onPress={() => executeAction({ action, type, value })}>
     <RemoveIcon source={trashIcon} />
-  </RemoveButton>
+  </StyledButton>
 )
+
+RemoveButton.propTypes = {
+  type: string.isRequired,
+  action: func.isRequired,
+  value: string.isRequired,
+}
+
+export default RemoveButton

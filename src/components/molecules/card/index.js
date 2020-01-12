@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from '@emotion/native'
+import { string, number, func, shape } from 'prop-types'
 // UI Elements
-import CardHeader from '../../atoms/card-header'
-import CardFooter from '../../atoms/card-footer'
-import CardBody from '../../atoms/card-body'
+import { CardBody, CardFooter, CardHeader } from '../../atoms'
 
 const Wrapper = styled.View({
   height: 120,
@@ -19,7 +18,7 @@ const Wrapper = styled.View({
   borderRadius: 5,
 })
 
-export default ({
+const Card = ({
   address,
   balance,
   marketCapValue,
@@ -42,3 +41,15 @@ export default ({
     />
   </Wrapper>
 )
+
+Card.propTypes = {
+  address: string.isRequired,
+  balance: number.isRequired,
+  marketCapValue: number.isRequired,
+  action: shape({
+    type: string,
+    action: func,
+  }).isRequired,
+}
+
+export default Card
