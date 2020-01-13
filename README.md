@@ -1,6 +1,7 @@
 ## ARK Mobile Wallet
 
 A mobile wallet project connected to the [ark.io](https://ark.io) ecosystem to manage wallets importation.
+<p align="center"><img src="https://user-images.githubusercontent.com/6919712/72203489-f8865980-344a-11ea-8476-3f11f4a8b713.png" width="200px" /></p>
 
 ### About the project
 
