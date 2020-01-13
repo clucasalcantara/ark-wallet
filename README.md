@@ -17,7 +17,7 @@ This project was developed with [react-native](https://facebook.github.io/react-
 - [redux-persist](https://github.com/rt2zz/redux-persist) - To persist and rehydarte a redux store
 - [redux-logger](https://github.com/LogRocket/redux-logger) - To better display the data flow logs
 - [emotion](https://emotion.sh) - As the styled components library
-- [prop-types]((https://github.com/facebook/prop-types) - to execution time type checking
+- [prop-types](https://github.com/facebook/prop-types) - to execution time type checking
 
 ### Folder Structure
 
